@@ -1,0 +1,20 @@
+# 数据库配置
+mysql:
+  # 是否使用mysql false为使用yml存储 true为mysql存储
+  enable: false
+  # 数据库版本8以上请填写 com.mysql.cj.jdbc.Driver
+  drive: "com.mysql.jdbc.Driver"
+  # 是否使用SSL方式连接数据库 一般默认即可
+  useSSL: false
+  host: "localhost"
+  port: 3306
+  database: "saveitem"
+  username: "root"
+  password: "123456"
+  # HikariCP 配置 非必要不需要更改
+  pool:
+    maximumPoolSize: 10         # 连接池中允许的最大连接数
+    minimumIdle: 2              # 连接池中保持的最小空闲连接数
+    connectionTimeout: 30000    # 获取连接的最大等待时间（毫秒），超时将抛出异常
+    idleTimeout: 600000         # 空闲连接的最大存活时间（毫秒），超过时间将被释放
+    maxLifetime: 1800000        # 连接的最大存活时间（毫秒），超过时间将被关闭

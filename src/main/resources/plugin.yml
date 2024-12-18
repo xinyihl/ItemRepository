@@ -1,0 +1,10 @@
+name: ItemRepository
+version: '${version}'
+main: cn.xinyihl.ItemRepository
+load: STARTUP
+authors: [xinyihl, LanQin_]
+depend: [NBTAPI]
+commands:
+  saveitem:
+    aliases: [si]
+    permission: saveitem.admin
