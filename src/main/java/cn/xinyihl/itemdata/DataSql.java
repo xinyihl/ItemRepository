@@ -27,7 +27,7 @@ public class DataSql implements IData {
         try {
             Connection connection = this.databaseManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            setParameters(preparedStatement, new Object[] { savename, Utils.serializer(item) });
+            setParameters(preparedStatement, savename, Utils.serializer(item));
             preparedStatement.executeUpdate();
             connection.close();
             player.sendMessage("§a物品§7[" + savename + "§7]§a已保存至数据库");
@@ -46,7 +46,7 @@ public class DataSql implements IData {
         try {
             Connection connection = this.databaseManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            setParameters(preparedStatement, new Object[] { savename });
+            setParameters(preparedStatement, savename);
             ResultSet resultSet = preparedStatement.executeQuery();
             String itemData = null;
             if (resultSet.next()) {
@@ -68,6 +68,7 @@ public class DataSql implements IData {
         try {
             Connection connection = this.databaseManager.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            setParameters(preparedStatement, savename);
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 player.sendMessage("§a物品§7[" + savename + "§7]§a已删除");
@@ -102,7 +103,7 @@ public class DataSql implements IData {
 
     private void handleException(CommandSender sender, String message, Exception e) {
         sender.sendMessage("§c" + message + "：" + e.getMessage());
-        e.printStackTrace();
+        throw new RuntimeException(e);
     }
 
     private static void setParameters(PreparedStatement preparedStatement, Object... params) throws SQLException {
